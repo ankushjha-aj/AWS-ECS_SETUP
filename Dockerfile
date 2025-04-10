@@ -18,6 +18,7 @@ RUN corepack prepare pnpm@latest --activate
 # Install dependencies using pnpm
 RUN pnpm install --frozen-lockfile
 
+
 # Copy the rest of the project files
 COPY . .
 
@@ -51,4 +52,3 @@ EXPOSE 3001
 
 # Start the NestJS app
 CMD ["pnpm", "start:prod"]
-
