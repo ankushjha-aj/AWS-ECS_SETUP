@@ -1,9 +1,7 @@
 name: Build and Push
-
 on:
   pull_request:
     branches: ['main']
-
 permissions:
   id-token: write
   contents: read
@@ -15,7 +13,4 @@ jobs:
       dockerfile_path: Dockerfile
       aws_region: us-east-1
       docker_push: true
-    secrets:
-      ECR_REPOSITORY_URI: ${{ secrets.ECR_REPOSITORY_URI }}
-      AWS_ROLE_TO_ASSUME: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-      AWS_SESSION_NAME: ${{ secrets.AWS_SESSION_NAME }} 
+      ecr_repository_uri: 975050300138.dkr.ecr.us-east-1.amazonaws.com/test
