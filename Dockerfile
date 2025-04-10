@@ -16,8 +16,7 @@ RUN npm install -g corepack@0.15.3
 RUN corepack prepare pnpm@latest --activate
 
 # Install dependencies using pnpm
-# RUN pnpm install --frozen-lockfile
-RUN pnpm --version && pnpm install --frozen-lockfile
+RUN pnpm install --frozen-lockfile
 
 # Copy the rest of the project files
 COPY . .
