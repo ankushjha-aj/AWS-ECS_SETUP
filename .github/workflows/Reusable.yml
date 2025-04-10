@@ -1,23 +1,22 @@
 name: Reusable Docker Build Workflow
-
 on:
   workflow_call:
     inputs:
       dockerfile_path:
         description: 'Path to the Dockerfile'
         type: string
+        default: 'Dockerfile'
       aws_region:
         description: 'AWS region to deploy to'
         type: string
+        default: 'us-east-1'
       docker_push:
+        description: 'Whether to push the Docker image'
         type: boolean
-
-    secrets:
-      ECR_REPOSITORY_URI:
-        required: true
-      AWS_ROLE_TO_ASSUME:
-        required: true
-      AWS_SESSION_NAME: 
+        default: true
+      ecr_repository_uri:
+        description: 'ECR Repository URI'
+        type: string
         required: true
 
 jobs:
@@ -32,21 +31,21 @@ jobs:
       - name: Configure AWS credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
-          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-          role-session-name: ${{ secrets.AWS_SESSION_NAME }}
-          aws-region: us-east-1
-
+          role-to-assume: arn:aws:iam::975050300138:role/github-oidc-connect
+          role-session-name: github-oidc-connect
+          aws-region: ${{ inputs.aws_region }}
+          
       # Log in to Amazon ECR
       - name: Log in to Amazon ECR
         uses: aws-actions/amazon-ecr-login@v2
-
+        
       # Build and push the Docker image
       - name: Build and push Docker image
         uses: docker/build-push-action@v6
         with:
           context: .
           file: ${{ inputs.dockerfile_path }}
-          push:  ${{ inputs.docker_push }}
+          push: ${{ inputs.docker_push }}
           tags: |
-            ${{ secrets.ECR_REPOSITORY_URI }}:latest
-            ${{ secrets.ECR_REPOSITORY_URI }}:dev-${{ github.sha }}
+            ${{ inputs.ecr_repository_uri }}:latest
+            ${{ inputs.ecr_repository_uri }}:dev-${{ github.sha }}
