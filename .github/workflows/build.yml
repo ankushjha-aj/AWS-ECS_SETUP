@@ -17,4 +17,4 @@ jobs:
     secrets:
       ECR_REPOSITORY_URI: ${{ secrets.ECR_REPOSITORY_URI }}
       AWS_ROLE_TO_ASSUME: ${{ secrets.AWS_ROLE_TO_ASSUME }}
-      AWS_SESSION_NAME: ${{ secrets.AWS_SESSION_NAME }}
+      AWS_SESSION_NAME: ${{ secrets.AWS_SESSION_NAME }} 
