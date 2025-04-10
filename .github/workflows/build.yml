@@ -10,9 +10,11 @@ permissions:
   
 jobs:
   build_backend:
-    uses: ankushjha-aj/AWS-ECS_SETUP/.github/workflows/Reusable.yml@main
+    uses: ankushjha-aj/AWS-ECS_SETUP/.github/workflows/Reusable.yml@develop-1
     with:
       dockerfile_path: Dockerfile
       aws_region: us-east-1
     secrets:
       ECR_REPOSITORY_URI: ${{ secrets.ECR_REPOSITORY_URI }}
+      AWS_ROLE_TO_ASSUME: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+      AWS_SESSION_NAME: ${{ secrets.AWS_SESSION_NAME }}
