@@ -1,5 +1,5 @@
 # Stage 1: Build the NestJS application using pnpm
-FROM public.ecr.aws/docker/library/node:18-alpine AS builder
+FROM public.ecr.aws/docker/library/node:18-alpine AS builder 
 
 # Set working directory
 WORKDIR /app
@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy necessary files
 COPY package.json pnpm-lock.yaml ./
 COPY tsconfig.json ./
-COPY .env ./
+# COPY .env ./
 
 # Install Corepack 0.29.4 explicitly and enable it
 RUN npm install -g corepack@0.15.3
@@ -16,7 +16,8 @@ RUN npm install -g corepack@0.15.3
 RUN corepack prepare pnpm@latest --activate
 
 # Install dependencies using pnpm
-RUN pnpm install --frozen-lockfile
+# RUN pnpm install --frozen-lockfile
+RUN pnpm --version && pnpm install --frozen-lockfile
 
 # Copy the rest of the project files
 COPY . .
@@ -51,3 +52,4 @@ EXPOSE 3001
 
 # Start the NestJS app
 CMD ["pnpm", "start:prod"]
+
