@@ -9,6 +9,8 @@ on:
       aws_region:
         description: 'AWS region to deploy to'
         type: string
+      docker_push:
+        type: boolean
 
     secrets:
       ECR_REPOSITORY_URI:
@@ -44,7 +46,7 @@ jobs:
         with:
           context: .
           file: ${{ inputs.dockerfile_path }}
-          push: true
+          push:  ${{ inputs.docker_push }}
           tags: |
             ${{ secrets.ECR_REPOSITORY_URI }}:latest
             ${{ secrets.ECR_REPOSITORY_URI }}:dev-${{ github.sha }}
