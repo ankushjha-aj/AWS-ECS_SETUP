@@ -6,7 +6,7 @@ on:
 
 jobs:
   build_backend:
-    uses: ankushjha-aj/AWS-ECS_SETUP/.github/workflows/Reusable.yml@main
+    uses: ankushjha-aj/AWS-ECS_SETUP/.github/workflows/Reusable.yml@develop-1
     with:
       dockerfile_path: Dockerfile
       aws_region: us-east-1
