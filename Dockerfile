@@ -5,8 +5,8 @@ FROM public.ecr.aws/docker/library/node:18-alpine AS builder
 WORKDIR /app
 
 # Copy necessary files
-COPY package.json pnpm-lock.yaml ./
-COPY tsconfig.json ./
+# COPY package.json pnpm-lock.yaml ./
+# COPY tsconfig.json ./
 # COPY .env ./
 
 # Install Corepack 0.29.4 explicitly and enable it
